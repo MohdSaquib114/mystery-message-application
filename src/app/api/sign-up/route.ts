@@ -7,8 +7,8 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req:NextRequest){
     await dbConnnect()
     
+    const {username, password,email} = await req.json()
     try {
-       const {username, password,email} = await req.json()
        const existingVerifiedUser = await UserModel.findOne({
         username,
         isVerified:true
@@ -44,12 +44,14 @@ export async function POST(req:NextRequest){
                 } 
        }else{
             const hashedPassword = await bcrypt.hash(password,10)
+            
             const expiryDate = new Date()
             expiryDate.setHours(expiryDate.getHours()+1)
             await UserModel.create({
                 username,
                 password:hashedPassword,
                 email,
+                verifyCodeExpiry:expiryDate,
                 verifyCode:otp,
                 isVerified:false,
                 isAcceptingMessage:false,
@@ -59,7 +61,8 @@ export async function POST(req:NextRequest){
           
        }
 
-       const emailResponse = await sendVerificationEmail(username,otp,email)
+       const emailResponse = await sendVerificationEmail(username,email,otp)
+     
        if (!emailResponse.success) {
           return NextResponse.json({
             success:false,

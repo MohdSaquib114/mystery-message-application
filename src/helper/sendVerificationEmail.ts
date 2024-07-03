@@ -24,6 +24,7 @@ Best regards,
 The Mystery Message
 `;
 try {
+    
     await resend.emails.send({
     from: 'onboarding@resend.dev',
       to: email,

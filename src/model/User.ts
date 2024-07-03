@@ -4,7 +4,8 @@ import mongoose, {Document,Schema} from "mongoose";
 
 export interface Message extends Document {
     content:string;
-    createdAt:Date
+    createdAt:Date;
+    _id?:string
 }
 
 const MessageSchema : Schema<Message> = new Schema({
@@ -50,8 +51,7 @@ const UserSchema : Schema<User> = new Schema({
     },
     password:{
         type:String,
-        minlength:6,
-        maxlength:20,
+        
         required:[true,"Password is required"]
     },
     verifyCode:{
@@ -75,7 +75,7 @@ const UserSchema : Schema<User> = new Schema({
 
 })
 
+
  const UserModel = (mongoose.models.User as mongoose.Model<User>) || mongoose.model<User>( 'User', UserSchema)
-// export const MessageModel = (mongoose.models.Message as mongoose.Model<Message>) || mongoose.model<Message>( 'User', MessageSchema)
 
 export default UserModel

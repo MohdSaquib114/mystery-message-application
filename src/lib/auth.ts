@@ -15,11 +15,12 @@ export const nextAuthConfig : NextAuthOptions ={
     },
     async authorize(credentials): Promise<any>{
         await dbConnnect()
-        console.log(credentials)
+       console.log(credentials)
           try {
             const user = await UserModel.findOne({
              email:credentials?.email
             })
+            console.log(user)
             if(!user){
                 throw new Error("No user found with this email")
 
