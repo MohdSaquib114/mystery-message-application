@@ -44,6 +44,11 @@ export default function Page() {
         }
         
         setIsSubmitting(false)
+        toast({
+            title:"Credentials are correct",
+            description:"Welcome to Mystery Message",
+          
+        })
        router.replace("/dashboard")
        
      }

@@ -141,7 +141,7 @@ const copyUrlHandle = () => {
 
 
 if(!session || !session.user){
-  return <div>Please Login</div>
+    router.replace("/")
 }else{
   
   return (

@@ -62,7 +62,7 @@ export async function POST(req:NextRequest){
        }
 
        const emailResponse = await sendVerificationEmail(username,email,otp)
-     
+      console.log(emailResponse)
        if (!emailResponse.success) {
           return NextResponse.json({
             success:false,

@@ -24,7 +24,8 @@ Best regards,
 The Mystery Message
 `;
 try {
-    
+    console.log("otp",otp)
+    console.log("email",email)
     await resend.emails.send({
     from: 'onboarding@resend.dev',
       to: email,
